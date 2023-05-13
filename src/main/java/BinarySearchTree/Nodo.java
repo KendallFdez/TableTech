@@ -13,6 +13,19 @@ public class Nodo<T extends Comparable<? super T>> {
         System.out.println(right.element);
         return right.element;
     }
+
+    public void setElement(T element) {
+        this.element = element;
+        System.out.println(this.element);
+    }
+    public void setLeft(Nodo<T> left) {
+        this.left = left;
+        System.out.println(this.left.getElement());
+    }
+    public void setRight(Nodo<T> right) {
+        this.right = right;
+        System.out.println(this.right.getElement());
+    }
     T element;
     Nodo<T> left;
     Nodo<T> right;
