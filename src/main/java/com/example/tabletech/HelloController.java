@@ -1,14 +1,40 @@
 package com.example.tabletech;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
-public class HelloController {
-    @FXML
-    private Label welcomeText;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.URL;
+import java.util.ResourceBundle;
+import Classes.Server;
+
+public class HelloController implements Initializable {
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private TableColumn<?, ?> password;
+
+    @FXML
+    private TableColumn<?, ?> user;
+
+    @FXML
+    private TableView<?> userTable;
+
+    @FXML
+    private TableColumn<?, ?> userType;
+
+    private Server server;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try{
+            server = new Server(new ServerSocket(1234));
+        } catch (IOException e){
+            e.printStackTrace();
+            System.out.println("Error creando el servidor");
+        }
+        
     }
 }
