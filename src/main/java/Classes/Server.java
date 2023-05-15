@@ -1,5 +1,7 @@
 package Classes;
 
+import javafx.scene.control.TextField;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -21,6 +23,18 @@ public class Server {
             System.out.println("Error creando servidor");
             e.printStackTrace();
         }
+    }
+
+    public void recieveUsername(TextField userfld){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(socket.isConnected()){
+                    //String username = bufferedReader.readLine();
+
+                }
+            }
+        }).start();
     }
 
     public void closeAll(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){

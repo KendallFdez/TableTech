@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import Classes.Server;
+import javafx.scene.control.TextField;
 
 public class HelloController implements Initializable {
 
@@ -35,6 +36,9 @@ public class HelloController implements Initializable {
             e.printStackTrace();
             System.out.println("Error creando el servidor");
         }
-        
+
+        //server.recieveUsername(TextField userfld);
+        //server.recievePassword();
+
     }
 }
