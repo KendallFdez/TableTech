@@ -3,4 +3,7 @@
     <Username user = "Noguera">
         <Password value = "1234"/>
     </Username>
+    <Username user = "Javier">
+        <Password value = "4321"/>
+    </Username>
 </Users>

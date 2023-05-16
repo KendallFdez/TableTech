@@ -1,5 +1,7 @@
 package Classes;
 
+import com.example.tabletech.HelloApplication;
+import com.example.tabletech.HelloController;
 import javafx.scene.control.TextField;
 
 import java.io.*;
@@ -25,13 +27,52 @@ public class Server {
         }
     }
 
+    public void sendMessageToClient(String messageToClient){
+        try{
+            bufferedWriter.write(messageToClient);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        }catch(IOException e){
+            e.printStackTrace();
+            System.out.println("Error enviando mensaje al cliente");
+            closeAll(socket, bufferedReader, bufferedWriter);
+        }
+    }
+
     public void recieveUsername(TextField userfld){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while(socket.isConnected()){
-                    //String username = bufferedReader.readLine();
+                    try{
+                        String username = bufferedReader.readLine();
+                        System.out.println(username);
+                    }catch(IOException e){
+                        e.printStackTrace();
+                        System.out.println("Error reciviendo username del cliente");
+                        closeAll(socket, bufferedReader, bufferedWriter);
+                        break;
+                    }
+                }
+            }
+        }).start();
+    }
 
+    public void recievePassword(TextField passwordfld){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(socket.isConnected()){
+                    try{
+                        String password = bufferedReader.readLine();
+                        HelloController.addLabel(password, passwordfld);
+                        System.out.println("olis");
+                    }catch(IOException e){
+                        e.printStackTrace();
+                        System.out.println("Error reciviendo password del cliente");
+                        closeAll(socket, bufferedReader, bufferedWriter);
+                        break;
+                    }
                 }
             }
         }).start();
