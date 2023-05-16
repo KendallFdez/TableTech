@@ -62,6 +62,7 @@ public class HelloController implements Initializable {
         }
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         BinaryTree arbolAdmin = new BinaryTree();
+        BinaryTree arbolClient = new BinaryTree();
         try{
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(new File("C:\\Users\\jbarr\\OneDrive\\Documentos\\TEC\\Semestre I 2023\\Algoritmos I\\Proyectos Java\\TableTech\\src\\main\\resources\\com\\example\\tabletech\\admins.xml"));
@@ -91,6 +92,35 @@ public class HelloController implements Initializable {
         } catch (SAXException e) {
             throw new RuntimeException(e);
         }
+        try{
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(new File("C:\\Users\\jbarr\\OneDrive\\Documentos\\TEC\\Semestre I 2023\\Algoritmos I\\Proyectos Java\\TableTech\\src\\main\\resources\\com\\example\\tabletech\\clients.xml"));
+            doc.getDocumentElement().normalize();
+            NodeList userList = doc.getElementsByTagName("Username");
+            for (int i = 0; i < userList.getLength(); i++){
+                Node user = userList.item(i);
+                if (user.getNodeType() == Node.ELEMENT_NODE){
+                    Element userElement = (Element) user;
+                    System.out.println("Username: " + userElement.getAttribute("user"));
+
+                    NodeList userDetails = user.getChildNodes();
+                    for(int j = 0; j < userDetails.getLength(); j++){
+                        Node detail = userDetails.item(j);
+                        if(detail.getNodeType() == Node.ELEMENT_NODE){
+                            Element detailElement = (Element) detail;
+                            System.out.println("    " + detailElement.getTagName() + ": " + detailElement.getAttribute("value"));
+                            arbolClient.insert(detailElement.getAttribute("value"));
+                        }
+                    }
+                }
+            }
+        }catch(ParserConfigurationException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SAXException e) {
+            throw new RuntimeException(e);
+        }
         server.recieveMessageFromClient(username, password);
 
         loginbtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -98,6 +128,11 @@ public class HelloController implements Initializable {
             public void handle(ActionEvent event) {
                 if (arbolAdmin.contains(password.getText())){
                     System.out.println("Login");
+                    server.sendMessageToClient("admin");
+                }
+                if (arbolClient.contains(password.getText())){
+                    System.out.println("Login");
+                    server.sendMessageToClient("client");
                 }
                 else{
                     System.out.println("Contraseña o usuario equivocados");
