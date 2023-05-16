@@ -39,34 +39,18 @@ public class Server {
         }
     }
 
-    public void recieveUsername(TextField userfld){
+    public void recieveMessageFromClient(TextField userfld, TextField passwordfld){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while(socket.isConnected()){
                     try{
                         String username = bufferedReader.readLine();
-                        System.out.println(username);
-                    }catch(IOException e){
-                        e.printStackTrace();
-                        System.out.println("Error reciviendo username del cliente");
-                        closeAll(socket, bufferedReader, bufferedWriter);
-                        break;
-                    }
-                }
-            }
-        }).start();
-    }
+                        HelloController.addLabel(username, userfld);
 
-    public void recievePassword(TextField passwordfld){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(socket.isConnected()){
-                    try{
                         String password = bufferedReader.readLine();
                         HelloController.addLabel(password, passwordfld);
-                        System.out.println("olis");
+
                     }catch(IOException e){
                         e.printStackTrace();
                         System.out.println("Error reciviendo password del cliente");

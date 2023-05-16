@@ -3,7 +3,7 @@ package Classes;
 public class User {
     private String username;
     private String password;
-    public User(String userType, String username, String password) {
+    public User( String username, String password) {
         this.username = username;
         this.password = password;
     }

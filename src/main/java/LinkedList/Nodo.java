@@ -4,24 +4,35 @@ package LinkedList;
  * Esta clase define nodos para una lista enlazada
  */
 public class Nodo {
-    public Object data;
+    public String data1;
+    public String data2;
     public Nodo next;
 
     /**
      * Metodo constructor para la clase
-     * @param data Elemento que contiene el nodo
+     * @param data1 Elemento que contiene el nodo
+     * @param data2 Elemento que contiene el nodo
      */
-    public Nodo(Object data){
+    public Nodo(String data1, String data2){
         this.next = null;
-        this.data = data;
+        this.data1 = data1;
+        this.data2 = data2;
     }
 
     /**
      * Este metodo retorna el elemento de un nodo
      * @return Contenido de un nodo
      */
-    public Object getData(){
-        return this.data;
+    public String getData1(){
+        return this.data1;
+    }
+
+    /**
+     * Este metodo retorna el elemento de un nodo
+     * @return Contenido de un nodo
+     */
+    public String getData2(){
+        return this.data2;
     }
 
     /**
@@ -29,7 +40,7 @@ public class Nodo {
      * @param data Es el elemento contenido en un nodo
      */
     public void setData(Object data){
-        this.data = data;
+        this.data1 = data1;
     }
 
     /**

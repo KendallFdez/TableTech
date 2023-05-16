@@ -2,11 +2,14 @@ package com.example.tabletech;
 
 import BinarySearchTree.BinaryTree;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -17,6 +20,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import Classes.Server;
 import Classes.User;
+import LinkedList.ListaEnlazada;
+import LinkedList.Nodo;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -38,6 +43,9 @@ public class HelloController implements Initializable {
 
     @FXML
     private AnchorPane serverApp;
+
+    @FXML
+    private Button loginbtn;
 
     @FXML
     private TextField username;
@@ -83,22 +91,26 @@ public class HelloController implements Initializable {
         } catch (SAXException e) {
             throw new RuntimeException(e);
         }
-        //server.recieveUsername(username);
-        server.recievePassword(password);
-        if (arbolAdmin.contains(password.getText())){
-            System.out.println("holis polis");
-            //server.sendMessageToClient("admin");
-            username.clear();
-            password.clear();
-        }
+        server.recieveMessageFromClient(username, password);
+
+        loginbtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (arbolAdmin.contains(password.getText())){
+                    System.out.println("Login");
+                }
+                else{
+                    System.out.println("Contraseña o usuario equivocados");
+                }
+            }
+        });
+
     }
     public static void addLabel (String messageFromClient, TextField textField){
-        Text text = new Text(messageFromClient);
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                textField.setText(String.valueOf(text));
+                textField.setText(messageFromClient);
             }
         });
     }

@@ -34,10 +34,11 @@ public class ListaEnlazada {
 
     /**
      * Este metodo recibe un objeto y lo inserta como primer elemento de la lista
-     * @param data Nodo con valor objeto
+     * @param data1 Nodo con valor objeto
+     * @param data2 Nodo con valor objeto
      */
-    public void insertFirst(Object data){
-        Nodo newNode = new Nodo(data);
+    public void insertFirst(String data1, String data2){
+        Nodo newNode = new Nodo(data1, data2);
         newNode.next = this.head;
         this.head = newNode;
         this.size++;
@@ -45,17 +46,18 @@ public class ListaEnlazada {
 
     /**
      * Este metodo recibe un objeto y lo inserta como utlimo elemento de la lista
-     * @param data Nodo con valor objeto
+     * @param username Nodo con valor objeto
+     * @param password Nodo con valor objeto
      */
-    public void insertLast(Object data){
-        Nodo newNode = new Nodo(data);
+    public void insertLast(String username, String password){
+        Nodo newNode = new Nodo(username, password);
         newNode.next = null;
         if (isEmpty()){
             this.head = newNode;
             this.size++;
         }
         else{
-            Nodo temp = new Nodo(null);
+            Nodo temp = new Nodo(null, null);
             temp = head;
             while (temp.next != null){
                 temp = temp.next;
@@ -87,7 +89,8 @@ public class ListaEnlazada {
     public void displayList(){
         Nodo current = this.head;
         while (current != null){
-            System.out.println(current.getData());
+            System.out.println(current.getData1());
+            System.out.println(current.getData2());
             current = current.getNext();
         }
     }
@@ -97,10 +100,10 @@ public class ListaEnlazada {
      * @param searchValue Elemento a buscar en la lista
      * @return Elemento encontrado en la lista
      */
-    public Nodo find (Object searchValue){
+    public Nodo find (String searchValue){
         Nodo current = this.head;
         while (current != null){
-            if (current.getData().equals(searchValue)){
+            if (current.getData1().equals(searchValue) && current.getData2().equals(searchValue)){
                 return current;
             }
             else{
@@ -119,7 +122,7 @@ public class ListaEnlazada {
         Nodo current = this.head;
         Nodo previous = this.head;
         while (current != null){
-            if (current.getData().equals(searchValue)){
+            if (current.getData1().equals(searchValue) && current.getData2().equals(searchValue)){
                 if (current == this.head){
                     this.head = this.head.getNext();
                 }
