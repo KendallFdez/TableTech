@@ -81,6 +81,7 @@ public class HelloController implements Initializable {
                             Element detailElement = (Element) detail;
                             System.out.println("    " + detailElement.getTagName() + ": " + detailElement.getAttribute("value"));
                             arbolAdmin.insert(detailElement.getAttribute("value"));
+                            arbolAdmin.insert(userElement.getAttribute("user"));
                         }
                     }
                 }
@@ -102,7 +103,6 @@ public class HelloController implements Initializable {
                 if (user.getNodeType() == Node.ELEMENT_NODE){
                     Element userElement = (Element) user;
                     System.out.println("Username: " + userElement.getAttribute("user"));
-
                     NodeList userDetails = user.getChildNodes();
                     for(int j = 0; j < userDetails.getLength(); j++){
                         Node detail = userDetails.item(j);
@@ -110,6 +110,7 @@ public class HelloController implements Initializable {
                             Element detailElement = (Element) detail;
                             System.out.println("    " + detailElement.getTagName() + ": " + detailElement.getAttribute("value"));
                             arbolClient.insert(detailElement.getAttribute("value"));
+                            arbolClient.insert(userElement.getAttribute("user"));
                         }
                     }
                 }
@@ -126,15 +127,11 @@ public class HelloController implements Initializable {
         loginbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (arbolAdmin.contains(password.getText())){
-                    System.out.println("Login");
+                if (arbolAdmin.contains(username.getText()) && arbolAdmin.contains(password.getText())){
                     server.sendMessageToClient("admin");
-                }
-                if (arbolClient.contains(password.getText())){
-                    System.out.println("Login");
+                } else if (arbolClient.contains(username.getText()) && arbolClient.contains(password.getText())) {
                     server.sendMessageToClient("client");
-                }
-                else{
+                } else{
                     System.out.println("Contraseña o usuario equivocados");
                 }
             }
