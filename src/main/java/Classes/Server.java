@@ -48,6 +48,7 @@ public class Server {
                         String username = bufferedReader.readLine();
                         HelloController.addLabel(username, userfld);
 
+
                         String password = bufferedReader.readLine();
                         HelloController.addLabel(password, passwordfld);
 
