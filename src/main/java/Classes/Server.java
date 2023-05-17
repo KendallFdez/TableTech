@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Esta clase crea el server que sera utilizado
+ * Esta clase crea el server que sea utilizado
  */
 public class Server {
 
