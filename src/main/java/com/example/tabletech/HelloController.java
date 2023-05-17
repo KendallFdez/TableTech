@@ -36,6 +36,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+/**
+ * Esta clase es el controlador de la aplicacion
+ */
 public class HelloController implements Initializable {
 
     @FXML
@@ -52,6 +55,11 @@ public class HelloController implements Initializable {
 
     private Server server;
 
+    /**
+     * Metodo que inicia la logica del controller
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
@@ -122,9 +130,14 @@ public class HelloController implements Initializable {
         } catch (SAXException e) {
             throw new RuntimeException(e);
         }
+
         server.recieveMessageFromClient(username, password);
 
         loginbtn.setOnAction(new EventHandler<ActionEvent>() {
+            /**
+             * Metodo que permite enviar un mensaje al cliente
+             * @param event
+             */
             @Override
             public void handle(ActionEvent event) {
                 if (arbolAdmin.contains(username.getText()) && arbolAdmin.contains(password.getText())){
@@ -138,8 +151,17 @@ public class HelloController implements Initializable {
         });
 
     }
+
+    /**
+     * Este metodo recibe el usuario y contraseña del cliente
+     * @param messageFromClient
+     * @param textField
+     */
     public static void addLabel (String messageFromClient, TextField textField){
         Platform.runLater(new Runnable() {
+            /**
+             * Este metodo actualiza los textfield con la informacion requerida
+             */
             @Override
             public void run() {
                 textField.setText(messageFromClient);

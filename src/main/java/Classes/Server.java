@@ -8,6 +8,9 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Esta clase crea el server que sera utilizado
+ */
 public class Server {
 
     private ServerSocket serverSocket;
@@ -15,6 +18,10 @@ public class Server {
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
 
+    /**
+     * Define las caracteristicas del server
+     * @param serverSocket
+     */
     public Server(ServerSocket serverSocket){
         try{
             this.serverSocket = serverSocket;
@@ -27,6 +34,10 @@ public class Server {
         }
     }
 
+    /**
+     * Este metodo envia un mensaje al cliente
+     * @param messageToClient
+     */
     public void sendMessageToClient(String messageToClient){
         try{
             bufferedWriter.write(messageToClient);
@@ -39,8 +50,16 @@ public class Server {
         }
     }
 
+    /**
+     * Este metodo recive un mensaje del cliente
+     * @param userfld
+     * @param passwordfld
+     */
     public void recieveMessageFromClient(TextField userfld, TextField passwordfld){
         new Thread(new Runnable() {
+            /**
+             * Este metodo corre el metodo recieveMessageFromClient
+             */
             @Override
             public void run() {
                 while(socket.isConnected()){
@@ -63,6 +82,12 @@ public class Server {
         }).start();
     }
 
+    /**
+     * Este metodo cierra todos los sockets y buffers
+     * @param socket
+     * @param bufferedReader
+     * @param bufferedWriter
+     */
     public void closeAll(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
         try{
             if (bufferedReader != null){

@@ -18,7 +18,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Esta clase inicia la app del server
+ */
 public class HelloApplication extends Application {
+    /**
+     * Este metodo inicia el fxml
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
@@ -28,6 +36,10 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    /**
+     * Este metodo inicia la aplicacion
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
