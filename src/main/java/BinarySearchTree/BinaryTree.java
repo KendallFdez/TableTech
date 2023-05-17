@@ -135,7 +135,6 @@ public class BinaryTree<T extends Comparable<? super T>> {
     /**
      * Elimina un nuevo nodo al binary tree pero especificandole desde donde
      * @param element El valor del nodo a eliminar
-     * @return No retorna nada
      */
     public void remove(T element) {
         this.root = this.remove(element,this.root);
