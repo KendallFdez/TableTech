@@ -13,6 +13,7 @@ public class ListaEnlazada {
      */
     public ListaEnlazada(){
         this.head = null;
+        this.last = null;
         this.size = 0;
     }
 
@@ -21,7 +22,11 @@ public class ListaEnlazada {
      * @return Valor booleano si la lista esta vacia o no
      */
     public boolean isEmpty(){
-        return this.head ==  null;
+        if(this.head == null && this.last == null){
+            return true;
+        } else{
+            return false;
+        }
     }
 
     /**
@@ -37,10 +42,14 @@ public class ListaEnlazada {
      * @param data1 Nodo con valor objeto
      * @param data2 Nodo con valor objeto
      */
-    public void insertFirst(String data1, String data2){
+    public void insertFirst(String data1, String data2) {
         Nodo newNode = new Nodo(data1, data2);
-        newNode.next = this.head;
-        this.head = newNode;
+        if (this.isEmpty()) {
+            this.head = this.last = newNode;
+        } else {
+            newNode.setNext(this.head);
+            this.head = newNode;
+        }
         this.size++;
     }
 
@@ -51,20 +60,14 @@ public class ListaEnlazada {
      */
     public void insertLast(String username, String password){
         Nodo newNode = new Nodo(username, password);
-        newNode.next = null;
         if (isEmpty()){
             this.head = newNode;
-            this.size++;
+            this.last = newNode;
+        } else{
+            this.last.setNext(newNode);
+            this.last = newNode;
         }
-        else{
-            Nodo temp = new Nodo(null, null);
-            temp = head;
-            while (temp.next != null){
-                temp = temp.next;
-            }
-            temp.next = newNode;
-            this.size ++;
-        }
+        this.size ++;
     }
 
     /**
@@ -77,8 +80,7 @@ public class ListaEnlazada {
             this.head = this.head.next;
             this.size--;
             return temp;
-        }
-        else{
+        } else{
             return null;
         }
     }
@@ -137,6 +139,18 @@ public class ListaEnlazada {
             return current;
         }
         return null;
+    }
+
+    /**
+     * Este método devuelve el primer elemento de la lista
+     * @return Primer elemento de la lista o null
+     */
+    public Nodo getHead(){
+        if(!isEmpty()){
+            return this.head;
+        }else{
+            return null;
+        }
     }
 }
 
